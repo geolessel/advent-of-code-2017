@@ -1,13 +1,15 @@
 defmodule SpiralMemory do
-  def steps(location \\ 347991) do
+  @input 347991
+  @steps 250
+
+  def steps(location \\ @input) do
     trunc(
       steps_to_center(:hor, location) +
       steps_to_center(:ver, location)
     )
+    |> IO.inspect(label: "distance to center")
   end
 
-  @steps 250
-  
   def part2 do
     row = 0
     col = 0
@@ -16,9 +18,8 @@ defmodule SpiralMemory do
     |> loop({row, col+1}, :e, 1)
     |> Map.values()
     |> Enum.sort()
-    |> Enum.filter(&(&1 > 347991))
-    |> Enum.at(0)
-    |> IO.inspect(label: "first value written that is larger than the puzzle input")
+    |> Enum.find(&(&1 > @input))
+    |> IO.inspect(label: "first value larger than the puzzle input")
   end
 
   def loop(grid, _c, _d, step) when step >= @steps, do: grid
