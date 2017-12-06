@@ -6,7 +6,7 @@ defmodule MemoryTest do
   use ExUnit.Case
 
   setup do
-    {:ok, _pid} = Memory.start_link
+    {:ok, _pid} = Memory.start
     :ok
   end
 
@@ -20,5 +20,9 @@ defmodule MemoryTest do
 
   test "0270 is seen on 5th reallocation" do
     assert Memory.step1("0 2 7 0") == 5
+  end
+
+  test "0270 has a cycle of 4" do
+    assert Memory.step2("0 2 7 0") == 4
   end
 end
