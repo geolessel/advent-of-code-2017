@@ -1,7 +1,7 @@
 defmodule Memory do
   use Agent
 
-  @input "4	1	15	12	0	9	9	5	5	8	7	3	14	5	12	3"
+  @input "4 1 15 12 0 9 9 5 5 8 7 3 14 5 12 3"
   
   def run(["--all"]) do
     Memory.start
@@ -17,7 +17,6 @@ defmodule Memory do
     Memory.start
     Memory.step2() |> IO.inspect(label: "step2")
   end
-
   def run(_) do
     IO.puts("USAGE: elixir memory.exs --all|step1|step2")
   end
@@ -43,7 +42,7 @@ defmodule Memory do
 
   def step2(blocklist \\ @input) do
     blocklist
-           |> record(:step2)
+    |> record(:step2)
     |> reallocate()
     |> seen_before?(:step2)
     |> case do
